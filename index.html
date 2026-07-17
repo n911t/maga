@@ -2,213 +2,234 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>مجلة الحلقات</title>
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 
         body {
-            background-color: #0a0f0a;
             font-family: 'Noto Kufi Arabic', sans-serif;
             min-height: 100vh;
             overflow-x: hidden;
+            transition: background-color 0.5s, color 0.5s;
+            padding-bottom: 80px;
         }
 
-        /* ===== PIXEL GRID BACKGROUND ===== */
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image:
-                linear-gradient(rgba(0, 255, 0, 0.03) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(0, 255, 0, 0.03) 1px, transparent 1px);
+        /* ========== THEMES ========== */
+        body.theme-oil { background-color: #1a1008; color: #d4a44c; background-image: radial-gradient(ellipse at 20% 50%, rgba(139,69,19,0.15) 0%, transparent 50%), radial-gradient(ellipse at 80% 20%, rgba(184,115,51,0.1) 0%, transparent 50%); }
+        body.theme-oil .header { background: linear-gradient(180deg, #2a1a0a 0%, #1a1008 100%); border-bottom-color: #b87333; }
+        body.theme-oil .header::after { background: repeating-linear-gradient(90deg, #8b4513 0px, #8b4513 10px, #b87333 10px, #b87333 20px, #cd853f 20px, #cd853f 30px); }
+        body.theme-oil .logo { color: #daa520; text-shadow: 2px 2px 0 #5c3310, 4px 4px 0 #3a1f00, 0 0 15px rgba(218,165,32,0.4); }
+        body.theme-oil .subtitle { color: #cd853f; }
+        body.theme-oil .pixel-divider span:nth-child(odd) { background: #b87333; }
+        body.theme-oil .pixel-divider span:nth-child(even) { background: #daa520; }
+        body.theme-oil .card { background: linear-gradient(135deg, #2a1a0a, #3a2510); border-color: #8b4513; }
+        body.theme-oil .card:hover, body.theme-oil .card:active { border-color: #b87333; box-shadow: 0 4px 15px rgba(139,69,19,0.3); }
+        body.theme-oil .card::before { background: linear-gradient(90deg, transparent, rgba(184,115,51,0.08), transparent); }
+        body.theme-oil .card-badge { background: #b87333; color: #1a1008; }
+        body.theme-oil .card-title { color: #daa520; }
+        body.theme-oil .card-desc { color: #a07840; }
+        body.theme-oil .card-date { color: #cd853f; }
+        body.theme-oil .card-size { color: #b87333; }
+        body.theme-oil .card-meta { border-color: #3a2510; }
+        body.theme-oil .download-btn { color: #daa520; border-color: #8b4513; }
+        body.theme-oil .download-btn:hover, body.theme-oil .download-btn:active { background: #b87333; color: #1a1008; }
+        body.theme-oil .modal-overlay { background: rgba(15,8,0,0.95); }
+        body.theme-oil .modal { background: linear-gradient(135deg, #2a1a0a, #1a1008); border-color: #b87333; }
+        body.theme-oil .modal-close { background: #b87333; color: #1a1008; }
+        body.theme-oil .modal-title { color: #daa520; }
+        body.theme-oil .modal-desc { color: #a07840; }
+        body.theme-oil .tag { background: rgba(184,115,51,0.15); color: #cd853f; border-color: #8b4513; }
+        body.theme-oil .modal-download { background: #b87333; color: #1a1008; border-color: #b87333; }
+        body.theme-oil .modal-download:hover { background: #daa520; }
+        body.theme-oil .footer { border-top-color: #8b4513; }
+        body.theme-oil .footer-text { color: #5c3310; }
+        body.theme-oil ::-webkit-scrollbar-track { background: #1a1008; }
+        body.theme-oil ::-webkit-scrollbar-thumb { background: #8b4513; }
+
+        body.theme-water { background-color: #f0f4f8; color: #3a4a5c; background-image: radial-gradient(ellipse at 15% 30%, rgba(100,149,237,0.12) 0%, transparent 50%), radial-gradient(ellipse at 85% 70%, rgba(255,182,193,0.12) 0%, transparent 50%); }
+        body.theme-water .header { background: linear-gradient(180deg, #e8eef5, #f0f4f8); border-bottom-color: #7eb8da; }
+        body.theme-water .header::after { background: repeating-linear-gradient(90deg, #7eb8da 0px, #7eb8da 10px, #ffb6c1 10px, #ffb6c1 20px, #90ee90 20px, #90ee90 30px); }
+        body.theme-water .logo { color: #5a8ab5; text-shadow: 2px 2px 0 #c8d8e8, 4px 4px 0 #e0e8f0, 0 0 12px rgba(90,138,181,0.2); }
+        body.theme-water .subtitle { color: #7eb8da; }
+        body.theme-water .pixel-divider span:nth-child(odd) { background: #7eb8da; }
+        body.theme-water .pixel-divider span:nth-child(even) { background: #ffb6c1; }
+        body.theme-water .card { background: rgba(255,255,255,0.85); border-color: #c8dce8; backdrop-filter: blur(5px); }
+        body.theme-water .card:hover, body.theme-water .card:active { border-color: #7eb8da; box-shadow: 0 4px 15px rgba(90,138,181,0.15); }
+        body.theme-water .card::before { background: linear-gradient(90deg, transparent, rgba(255,255,255,0.6), transparent); }
+        body.theme-water .card-badge { background: #7eb8da; color: #fff; }
+        body.theme-water .card-title { color: #4a7a9c; }
+        body.theme-water .card-desc { color: #7a8a9c; }
+        body.theme-water .card-date { color: #5a8ab5; }
+        body.theme-water .card-size { color: #7eb8da; }
+        body.theme-water .card-meta { border-color: #dce8f0; }
+        body.theme-water .download-btn { color: #5a8ab5; border-color: #b0d0e8; }
+        body.theme-water .download-btn:hover, body.theme-water .download-btn:active { background: #5a8ab5; color: #fff; }
+        body.theme-water .modal-overlay { background: rgba(230,235,242,0.95); }
+        body.theme-water .modal { background: #fff; border-color: #7eb8da; }
+        body.theme-water .modal-close { background: #ffb6c1; color: #fff; }
+        body.theme-water .modal-title { color: #4a7a9c; }
+        body.theme-water .modal-desc { color: #6a7a8c; }
+        body.theme-water .tag { background: rgba(126,184,218,0.15); color: #5a8ab5; border-color: #b0d0e8; }
+        body.theme-water .modal-download { background: #5a8ab5; color: #fff; border-color: #5a8ab5; }
+        body.theme-water .modal-download:hover { background: #4a7a9c; }
+        body.theme-water .footer { border-top-color: #c8dce8; }
+        body.theme-water .footer-text { color: #a0b0c0; }
+        body.theme-water ::-webkit-scrollbar-track { background: #e8eef5; }
+        body.theme-water ::-webkit-scrollbar-thumb { background: #7eb8da; }
+
+        body.theme-retro { background-color: #0a0f0a; color: #6a8f6a; }
+        body.theme-retro .header { background: linear-gradient(180deg, #0a1f0a, #0a0f0a); border-bottom-color: #00ff41; }
+        body.theme-retro .header::after { background: repeating-linear-gradient(90deg, #00ff41 0px, #00ff41 10px, #39ff14 10px, #39ff14 20px, #00ff00 20px, #00ff00 30px); }
+        body.theme-retro .logo { color: #00ff41; text-shadow: 2px 2px 0 #0a3d0a, 4px 4px 0 #003300, 0 0 15px #00ff41; }
+        body.theme-retro .subtitle { color: #39ff14; }
+        body.theme-retro .pixel-divider span:nth-child(odd) { background: #00ff41; }
+        body.theme-retro .pixel-divider span:nth-child(even) { background: #39ff14; }
+        body.theme-retro .card { background: linear-gradient(135deg, #0a1f0a, #0d260d); border-color: #00ff41; }
+        body.theme-retro .card:hover, body.theme-retro .card:active { border-color: #39ff14; box-shadow: 0 4px 15px rgba(0,255,65,0.2); }
+        body.theme-retro .card::before { background: linear-gradient(90deg, transparent, rgba(0,255,65,0.05), transparent); }
+        body.theme-retro .card-badge { background: #39ff14; color: #0a0f0a; }
+        body.theme-retro .card-title { color: #00ff41; }
+        body.theme-retro .card-desc { color: #6a8f6a; }
+        body.theme-retro .card-date { color: #39ff14; }
+        body.theme-retro .card-size { color: #00ff41; }
+        body.theme-retro .card-meta { border-color: #1a3a1a; }
+        body.theme-retro .download-btn { color: #00ff00; border-color: #00ff00; }
+        body.theme-retro .download-btn:hover, body.theme-retro .download-btn:active { background: #00ff00; color: #0a0f0a; }
+        body.theme-retro .modal-overlay { background: rgba(0,10,0,0.92); }
+        body.theme-retro .modal { background: linear-gradient(135deg, #0a1f0a, #0a0f0a); border-color: #00ff41; }
+        body.theme-retro .modal-close { background: #00ff41; color: #0a0f0a; }
+        body.theme-retro .modal-title { color: #00ff41; }
+        body.theme-retro .modal-desc { color: #6a8f6a; }
+        body.theme-retro .tag { background: rgba(0,255,65,0.1); color: #00ff41; border-color: #00ff41; }
+        body.theme-retro .modal-download { background: #00ff41; color: #0a0f0a; border-color: #00ff41; }
+        body.theme-retro .modal-download:hover { background: #39ff14; }
+        body.theme-retro .footer { border-top-color: #00ff41; }
+        body.theme-retro .footer-text { color: #3a5f3a; }
+        body.theme-retro ::-webkit-scrollbar-track { background: #0a0f0a; }
+        body.theme-retro ::-webkit-scrollbar-thumb { background: #00ff41; }
+
+        body.theme-retro::before {
+            content: ''; position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: linear-gradient(rgba(0,255,0,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(0,255,0,0.03) 1px, transparent 1px);
             background-size: 20px 20px;
             z-index: -1;
             animation: gridScroll 20s linear infinite;
         }
 
-        @keyframes gridScroll {
-            0% { background-position: 0 0; }
-            100% { background-position: 20px 20px; }
-        }
+        @keyframes gridScroll { 0% { background-position: 0 0; } 100% { background-position: 20px 20px; } }
 
-        /* ===== HEADER ===== */
+        /* ========== HEADER ========== */
         .header {
             text-align: center;
-            padding: 40px 20px;
-            background: linear-gradient(180deg, #0a1f0a 0%, #0a0f0a 100%);
-            border-bottom: 4px solid #00ff41;
+            padding: 25px 15px;
+            border-bottom: 4px solid;
             position: relative;
         }
-
         .header::after {
-            content: '';
-            position: absolute;
-            bottom: -8px;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: repeating-linear-gradient(
-                90deg,
-                #00ff41 0px,
-                #00ff41 10px,
-                #39ff14 10px,
-                #39ff14 20px,
-                #00ff00 20px,
-                #00ff00 30px
-            );
+            content: ''; position: absolute;
+            bottom: -8px; left: 0; width: 100%; height: 4px;
             animation: borderShift 2s linear infinite;
         }
-
-        @keyframes borderShift {
-            0% { background-position: 0 0; }
-            100% { background-position: 30px 0; }
-        }
+        @keyframes borderShift { 0% { background-position: 0 0; } 100% { background-position: 30px 0; } }
 
         .logo {
             font-family: 'Press Start 2P', cursive;
-            font-size: 2.5em;
-            color: #00ff41;
-            text-shadow:
-                3px 3px 0 #0a3d0a,
-                6px 6px 0 #003300,
-                0 0 20px #00ff41;
-            margin-bottom: 10px;
+            font-size: 1.4em;
+            margin-bottom: 8px;
             animation: logoGlow 2s ease-in-out infinite alternate;
         }
-
-        @keyframes logoGlow {
-            0% { text-shadow: 3px 3px 0 #0a3d0a, 6px 6px 0 #003300, 0 0 20px #00ff41; }
-            100% { text-shadow: 3px 3px 0 #0a3d0a, 6px 6px 0 #003300, 0 0 40px #39ff14, 0 0 60px #00ff00; }
-        }
+        @keyframes logoGlow { 0% { filter: brightness(1); } 100% { filter: brightness(1.3); } }
 
         .subtitle {
             font-family: 'Press Start 2P', cursive;
-            font-size: 0.7em;
-            color: #39ff14;
-            letter-spacing: 3px;
+            font-size: 0.45em;
+            letter-spacing: 2px;
         }
 
-        .pixel-divider {
-            display: flex;
-            justify-content: center;
-            gap: 4px;
-            margin: 20px 0;
-        }
+        .pixel-divider { display: flex; justify-content: center; gap: 3px; margin: 12px 0; }
+        .pixel-divider span { width: 6px; height: 6px; display: inline-block; animation: pixelBounce 0.6s ease-in-out infinite alternate; }
+        .pixel-divider span:nth-child(1) { animation-delay: 0s; }
+        .pixel-divider span:nth-child(2) { animation-delay: 0.1s; }
+        .pixel-divider span:nth-child(3) { animation-delay: 0.2s; }
+        .pixel-divider span:nth-child(4) { animation-delay: 0.3s; }
+        .pixel-divider span:nth-child(5) { animation-delay: 0.4s; }
+        .pixel-divider span:nth-child(6) { animation-delay: 0.5s; }
+        .pixel-divider span:nth-child(7) { animation-delay: 0.6s; }
+        .pixel-divider span:nth-child(8) { animation-delay: 0.7s; }
+        .pixel-divider span:nth-child(9) { animation-delay: 0.8s; }
+        @keyframes pixelBounce { 0% { transform: translateY(0); } 100% { transform: translateY(-5px); } }
 
-        .pixel-divider span {
-            width: 8px;
-            height: 8px;
-            display: inline-block;
-            animation: pixelBounce 0.6s ease-in-out infinite alternate;
-        }
-
-        .pixel-divider span:nth-child(1) { background: #00ff41; animation-delay: 0s; }
-        .pixel-divider span:nth-child(2) { background: #39ff14; animation-delay: 0.1s; }
-        .pixel-divider span:nth-child(3) { background: #00ff00; animation-delay: 0.2s; }
-        .pixel-divider span:nth-child(4) { background: #00ff41; animation-delay: 0.3s; }
-        .pixel-divider span:nth-child(5) { background: #39ff14; animation-delay: 0.4s; }
-        .pixel-divider span:nth-child(6) { background: #00ff00; animation-delay: 0.5s; }
-        .pixel-divider span:nth-child(7) { background: #00ff41; animation-delay: 0.6s; }
-        .pixel-divider span:nth-child(8) { background: #39ff14; animation-delay: 0.7s; }
-        .pixel-divider span:nth-child(9) { background: #00ff00; animation-delay: 0.8s; }
-
-        @keyframes pixelBounce {
-            0% { transform: translateY(0); }
-            100% { transform: translateY(-8px); }
-        }
-
-        /* ===== TABS ===== */
-        .tabs {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            padding: 20px;
-            flex-wrap: wrap;
-        }
-
+        /* ========== TABS ========== */
+        .tabs { display: flex; justify-content: center; gap: 6px; padding: 12px 10px; flex-wrap: wrap; }
         .tab-btn {
             font-family: 'Press Start 2P', cursive;
-            font-size: 0.6em;
-            padding: 12px 24px;
-            background: #0a1f0a;
-            color: #00ff41;
-            border: 3px solid #00ff41;
+            font-size: 0.45em;
+            padding: 8px 14px;
             cursor: pointer;
             transition: all 0.2s;
             text-transform: uppercase;
+            background: transparent;
+            border: 2px solid;
         }
+        body.theme-oil .tab-btn { color: #cd853f; border-color: #8b4513; }
+        body.theme-oil .tab-btn:hover, body.theme-oil .tab-btn.active { background: #b87333; color: #1a1008; border-color: #b87333; }
+        body.theme-water .tab-btn { color: #5a8ab5; border-color: #b0d0e8; background: #fff; }
+        body.theme-water .tab-btn:hover, body.theme-water .tab-btn.active { background: #5a8ab5; color: #fff; border-color: #5a8ab5; }
+        body.theme-retro .tab-btn { color: #00ff41; border-color: #00ff41; }
+        body.theme-retro .tab-btn:hover, body.theme-retro .tab-btn.active { background: #39ff14; color: #0a0f0a; border-color: #39ff14; }
 
-        .tab-btn:hover {
-            background: #00ff41;
-            color: #0a0f0a;
-            transform: scale(1.05);
-        }
-
-        .tab-btn.active {
-            background: #39ff14;
-            color: #0a0f0a;
-            border-color: #39ff14;
-            box-shadow: 0 0 15px rgba(57, 255, 20, 0.5);
-        }
-
-        /* ===== CARDS CONTAINER ===== */
+        /* ========== CARDS GRID ========== */
         .cards-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 25px;
-            padding: 30px;
-            max-width: 800px;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            padding: 10px;
+            max-width: 900px;
             margin: 0 auto;
         }
 
-        /* ===== CARD ===== */
+        @media (min-width: 480px) {
+            .cards-container { grid-template-columns: repeat(2, 1fr); gap: 12px; padding: 15px; }
+        }
+        @media (min-width: 768px) {
+            .cards-container { grid-template-columns: repeat(3, 1fr); gap: 15px; padding: 20px; max-width: 1000px; }
+            .logo { font-size: 2em; }
+            .subtitle { font-size: 0.6em; }
+            .tab-btn { font-size: 0.55em; padding: 10px 20px; }
+        }
+        @media (min-width: 1024px) {
+            .cards-container { grid-template-columns: repeat(3, 1fr); gap: 20px; padding: 25px; max-width: 1100px; }
+            .logo { font-size: 2.5em; }
+        }
+
+        /* ========== CARD ========== */
         .card {
-            background: linear-gradient(135deg, #0a1f0a 0%, #0d260d 100%);
-            border: 3px solid #00ff41;
+            border: 2px solid;
             position: relative;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.25s ease;
             overflow: hidden;
-            width: 100%;
+            border-radius: 6px;
         }
 
         .card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(0, 255, 65, 0.05), transparent);
-            transition: 0.5s;
+            content: ''; position: absolute;
+            top: 0; left: -100%;
+            width: 100%; height: 100%;
+            transition: 0.4s;
         }
+        .card:hover::before, .card:active::before { left: 100%; }
 
-        .card:hover::before {
-            left: 100%;
-        }
-
-        .card:hover {
-            transform: translateY(-5px) scale(1.01);
-            box-shadow:
-                0 10px 30px rgba(0, 255, 65, 0.2),
-                0 0 20px rgba(57, 255, 20, 0.15);
-            border-color: #39ff14;
+        .card:hover, .card:active {
+            transform: translateY(-3px) scale(1.02);
         }
 
         .card-image {
-            width: 100%;
-            height: 200px;
+            width: 100%; height: 100px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -217,299 +238,245 @@
         }
 
         .card-image::after {
-            content: '';
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background:
-                repeating-linear-gradient(
-                    0deg,
-                    transparent,
-                    transparent 2px,
-                    rgba(0, 0, 0, 0.1) 2px,
-                    rgba(0, 0, 0, 0.1) 4px
-                );
+            content: ''; position: absolute;
+            width: 100%; height: 100%;
+            background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.08) 2px, rgba(0,0,0,0.08) 4px);
         }
 
         .card-emoji {
-            font-size: 4em;
-            z-index: 1;
-            filter: drop-shadow(2px 2px 0 rgba(0, 0, 0, 0.5));
+            font-size: 2.5em; z-index: 1;
+            filter: drop-shadow(2px 2px 0 rgba(0,0,0,0.4));
             animation: float 3s ease-in-out infinite;
         }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
+        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
 
         .card-badge {
             position: absolute;
-            top: 10px;
-            right: 10px;
+            top: 6px; right: 6px;
             font-family: 'Press Start 2P', cursive;
-            font-size: 0.5em;
-            padding: 5px 10px;
-            background: #39ff14;
-            color: #0a0f0a;
+            font-size: 0.35em;
+            padding: 3px 6px;
             z-index: 2;
+            border-radius: 3px;
         }
 
-        .card-body {
-            padding: 15px;
-        }
+        .card-body { padding: 8px 10px; }
 
         .card-title {
             font-family: 'Press Start 2P', cursive;
-            font-size: 0.7em;
-            color: #00ff41;
-            margin-bottom: 10px;
-            line-height: 1.6;
+            font-size: 0.45em;
+            margin-bottom: 5px;
+            line-height: 1.5;
         }
 
         .card-desc {
-            font-size: 0.85em;
-            color: #6a8f6a;
-            line-height: 1.6;
-            margin-bottom: 15px;
+            font-size: 0.7em;
+            line-height: 1.4;
+            margin-bottom: 6px;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
         }
 
         .card-meta {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding-top: 10px;
-            border-top: 2px dashed #1a3a1a;
+            padding-top: 5px;
+            border-top: 1px dashed;
         }
 
-        .card-date {
-            font-family: 'Press Start 2P', cursive;
-            font-size: 0.45em;
-            color: #39ff14;
-        }
-
-        .card-size {
-            font-family: 'Press Start 2P', cursive;
-            font-size: 0.45em;
-            color: #00ff41;
-        }
+        .card-date { font-family: 'Press Start 2P', cursive; font-size: 0.3em; }
+        .card-size { font-family: 'Press Start 2P', cursive; font-size: 0.3em; }
 
         .download-btn {
-            display: block;
-            width: 100%;
-            padding: 12px;
-            margin-top: 10px;
+            display: block; width: 100%;
+            padding: 7px; margin-top: 6px;
             font-family: 'Press Start 2P', cursive;
-            font-size: 0.55em;
+            font-size: 0.4em;
             background: transparent;
-            color: #00ff00;
-            border: 2px solid #00ff00;
             cursor: pointer;
             transition: all 0.2s;
             text-transform: uppercase;
+            border-radius: 3px;
+            border: 1px solid;
+        }
+        .download-btn:active { transform: scale(0.95); }
+
+        @media (min-width: 768px) {
+            .card-image { height: 140px; }
+            .card-emoji { font-size: 3.5em; }
+            .card-badge { font-size: 0.4em; padding: 4px 8px; top: 8px; right: 8px; }
+            .card-body { padding: 10px 12px; }
+            .card-title { font-size: 0.55em; }
+            .card-desc { font-size: 0.8em; }
+            .card-date, .card-size { font-size: 0.35em; }
+            .download-btn { font-size: 0.45em; padding: 8px; }
         }
 
-        .download-btn:hover {
-            background: #00ff00;
-            color: #0a0f0a;
-            box-shadow: 0 0 15px rgba(0, 255, 0, 0.5);
-        }
-
-        .download-btn:active {
-            transform: scale(0.95);
-        }
-
-        /* ===== MODAL / OVERLAY ===== */
+        /* ========== MODAL ========== */
         .modal-overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 10, 0, 0.92);
+            display: none; position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
             z-index: 1000;
-            align-items: center;
+            align-items: flex-end;
             justify-content: center;
-            padding: 20px;
         }
-
-        .modal-overlay.active {
-            display: flex;
-            animation: fadeIn 0.3s ease;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
+        .modal-overlay.active { display: flex; animation: fadeIn 0.3s ease; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
         .modal {
-            background: linear-gradient(135deg, #0a1f0a 0%, #0a0f0a 100%);
-            border: 4px solid #00ff41;
-            max-width: 600px;
-            width: 100%;
-            max-height: 80vh;
+            border: 3px solid;
+            width: 100%; max-height: 85vh;
             overflow-y: auto;
             position: relative;
-            animation: modalSlide 0.4s ease;
+            animation: modalSlideUp 0.35s ease;
+            border-radius: 12px 12px 0 0;
         }
+        @keyframes modalSlideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
 
-        @keyframes modalSlide {
-            from { transform: translateY(50px) scale(0.9); opacity: 0; }
-            to { transform: translateY(0) scale(1); opacity: 1; }
+        @media (min-width: 768px) {
+            .modal-overlay { align-items: center; }
+            .modal { border-radius: 10px; max-width: 550px; max-height: 80vh; }
+            @keyframes modalSlideUp { from { transform: translateY(30px) scale(0.95); opacity: 0; } to { transform: translateY(0) scale(1); opacity: 1; } }
         }
 
         .modal-close {
-            position: absolute;
-            top: 10px;
-            left: 10px;
+            position: absolute; top: 10px; left: 10px;
             font-family: 'Press Start 2P', cursive;
-            font-size: 0.7em;
-            background: #00ff41;
-            color: #0a0f0a;
-            border: none;
-            padding: 8px 12px;
-            cursor: pointer;
-            z-index: 10;
+            font-size: 0.6em;
+            border: none; padding: 6px 10px;
+            cursor: pointer; z-index: 10;
+            border-radius: 4px;
         }
-
-        .modal-close:hover {
-            background: #39ff14;
-            transform: scale(1.1);
-        }
+        .modal-close:hover { transform: scale(1.1); }
 
         .modal-image {
-            width: 100%;
-            height: 250px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
+            width: 100%; height: 180px;
+            display: flex; align-items: center; justify-content: center;
+            position: relative; border-radius: 9px 9px 0 0;
         }
-
         .modal-image::after {
-            content: '';
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background:
-                repeating-linear-gradient(
-                    0deg,
-                    transparent,
-                    transparent 3px,
-                    rgba(0, 0, 0, 0.15) 3px,
-                    rgba(0, 0, 0, 0.15) 6px
-                );
+            content: ''; position: absolute;
+            width: 100%; height: 100%;
+            background: repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(0,0,0,0.12) 3px, rgba(0,0,0,0.12) 6px);
+            border-radius: 9px 9px 0 0;
+        }
+        .modal-emoji { font-size: 4em; z-index: 1; animation: float 2s ease-in-out infinite; }
+
+        @media (min-width: 768px) {
+            .modal-image { height: 220px; }
+            .modal-emoji { font-size: 5em; }
         }
 
-        .modal-emoji {
-            font-size: 6em;
-            z-index: 1;
-            animation: float 2s ease-in-out infinite;
-        }
-
-        .modal-content {
-            padding: 25px;
-        }
-
-        .modal-title {
-            font-family: 'Press Start 2P', cursive;
-            font-size: 0.85em;
-            color: #00ff41;
-            margin-bottom: 15px;
-            line-height: 1.8;
-        }
-
-        .modal-desc {
-            color: #6a8f6a;
-            line-height: 2;
-            margin-bottom: 20px;
-            font-size: 0.95em;
-        }
-
-        .modal-tags {
-            display: flex;
-            gap: 8px;
-            flex-wrap: wrap;
-            margin-bottom: 20px;
-        }
-
-        .tag {
-            font-family: 'Press Start 2P', cursive;
-            font-size: 0.4em;
-            padding: 6px 12px;
-            background: rgba(0, 255, 65, 0.1);
-            color: #00ff41;
-            border: 1px solid #00ff41;
-        }
+        .modal-content { padding: 15px; }
+        .modal-title { font-family: 'Press Start 2P', cursive; font-size: 0.65em; margin-bottom: 10px; line-height: 1.7; }
+        .modal-desc { line-height: 1.8; margin-bottom: 15px; font-size: 0.88em; }
+        .modal-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 15px; }
+        .tag { font-family: 'Press Start 2P', cursive; font-size: 0.35em; padding: 5px 10px; border-radius: 3px; }
 
         .modal-download {
-            display: block;
-            width: 100%;
-            padding: 15px;
+            display: block; width: 100%;
+            padding: 12px;
             font-family: 'Press Start 2P', cursive;
-            font-size: 0.65em;
-            background: #00ff41;
-            color: #0a0f0a;
-            border: 3px solid #00ff41;
+            font-size: 0.55em;
             cursor: pointer;
             transition: all 0.2s;
             text-transform: uppercase;
+            border-radius: 5px;
+            border: 2px solid;
         }
+        .modal-download:active { transform: scale(0.97); }
 
-        .modal-download:hover {
-            background: #39ff14;
-            box-shadow: 0 0 20px rgba(57, 255, 20, 0.5);
-            transform: scale(1.02);
+        /* ========== FOOTER ========== */
+        .footer { text-align: center; padding: 20px 15px; border-top: 2px solid; margin-top: 15px; }
+        .footer-text { font-family: 'Press Start 2P', cursive; font-size: 0.4em; }
+        .footer-hearts { margin-top: 8px; font-size: 1em; animation: heartbeat 1s ease-in-out infinite; }
+        @keyframes heartbeat { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.2); } }
+
+        /* ========== THEME BAR (BOTTOM) ========== */
+        .theme-bar {
+            position: fixed;
+            bottom: 0; left: 0; width: 100%;
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            padding: 10px;
+            z-index: 999;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
         }
+        body.theme-oil .theme-bar { background: rgba(26,16,8,0.92); border-top: 2px solid #8b4513; }
+        body.theme-water .theme-bar { background: rgba(240,244,248,0.92); border-top: 2px solid #c8dce8; }
+        body.theme-retro .theme-bar { background: rgba(10,15,10,0.92); border-top: 2px solid #00ff41; }
 
-        /* ===== SCROLLBAR ===== */
-        ::-webkit-scrollbar { width: 10px; }
-        ::-webkit-scrollbar-track { background: #0a0f0a; }
-        ::-webkit-scrollbar-thumb {
-            background: #00ff41;
-            border: 2px solid #0a0f0a;
-        }
-        ::-webkit-scrollbar-thumb:hover { background: #39ff14; }
-
-        /* ===== FOOTER ===== */
-        .footer {
-            text-align: center;
-            padding: 30px;
-            border-top: 3px solid #00ff41;
-            margin-top: 20px;
-        }
-
-        .footer-text {
+        .theme-btn {
             font-family: 'Press Start 2P', cursive;
-            font-size: 0.5em;
-            color: #3a5f3a;
+            font-size: 0.4em;
+            padding: 8px 12px;
+            border: 2px solid;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-transform: uppercase;
+            background: transparent;
+            border-radius: 4px;
+        }
+        .theme-btn:active { transform: scale(0.95); }
+
+        .theme-btn-oil { color: #b87333; border-color: #b87333; }
+        body.theme-oil .theme-btn-oil { background: #b87333; color: #1a1008; }
+
+        .theme-btn-water { color: #5a8ab5; border-color: #5a8ab5; }
+        body.theme-water .theme-btn-water { background: #5a8ab5; color: #fff; }
+
+        .theme-btn-retro { color: #39ff14; border-color: #39ff14; }
+        body.theme-retro .theme-btn-retro { background: #39ff14; color: #0a0f0a; }
+
+        @media (min-width: 768px) {
+            .theme-btn { font-size: 0.5em; padding: 10px 20px; }
+            .theme-bar { gap: 12px; padding: 12px; }
         }
 
-        .footer-hearts {
-            margin-top: 10px;
-            font-size: 1.2em;
-            animation: heartbeat 1s ease-in-out infinite;
-        }
+        /* ========== SCROLLBAR ========== */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { }
+        ::-webkit-scrollbar-thumb { border-radius: 3px; border: 1px solid; }
+        body.theme-oil ::-webkit-scrollbar-thumb { background: #8b4513; border-color: #1a1008; }
+        body.theme-water ::-webkit-scrollbar-thumb { background: #7eb8da; border-color: #e8eef5; }
+        body.theme-retro ::-webkit-scrollbar-thumb { background: #00ff41; border-color: #0a0f0a; }
 
-        @keyframes heartbeat {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.2); }
+        /* ========== RIPPLE EFFECT ========== */
+        .ripple {
+            position: absolute;
+            border-radius: 50%;
+            transform: scale(0);
+            animation: rippleAnim 0.5s ease-out;
+            pointer-events: none;
+            z-index: 100;
         }
+        @keyframes rippleAnim { to { transform: scale(3); opacity: 0; } }
 
-        /* ===== RESPONSIVE ===== */
-        @media (max-width: 768px) {
-            .logo { font-size: 1.3em; }
-            .subtitle { font-size: 0.5em; }
-            .cards-container { padding: 15px; gap: 15px; }
-            .card-title { font-size: 0.6em; }
+        /* ========== TOAST ========== */
+        .toast {
+            position: fixed; bottom: 70px; left: 50%; transform: translateX(-50%);
+            font-family: 'Press Start 2P', cursive; font-size: 0.45em;
+            padding: 10px 18px; border-radius: 6px;
+            z-index: 2000; opacity: 0;
+            animation: toastIn 0.3s ease forwards, toastOut 0.3s ease 1.5s forwards;
         }
+        body.theme-oil .toast { background: #b87333; color: #1a1008; }
+        body.theme-water .toast { background: #5a8ab5; color: #fff; }
+        body.theme-retro .toast { background: #39ff14; color: #0a0f0a; }
+        @keyframes toastIn { from { opacity: 0; transform: translateX(-50%) translateY(20px); } to { opacity: 1; transform: translateX(-50%) translateY(0); } }
+        @keyframes toastOut { from { opacity: 1; } to { opacity: 0; } }
+
+        /* ========== CARD PRESS EFFECT ========== */
+        .card:active { transform: scale(0.97); transition: transform 0.1s; }
     </style>
 </head>
-<body>
+<body class="theme-retro">
 
-    <!-- HEADER -->
     <header class="header">
         <div class="logo">PIXEL MAGAZINE</div>
         <div class="pixel-divider">
@@ -519,7 +486,6 @@
         <div class="subtitle">8-BIT EPISODES & MIXES</div>
     </header>
 
-    <!-- TABS -->
     <div class="tabs">
         <button class="tab-btn active" onclick="filterCards('all', this)">الكل</button>
         <button class="tab-btn" onclick="filterCards('episode', this)">حلقات</button>
@@ -527,11 +493,8 @@
         <button class="tab-btn" onclick="filterCards('special', this)">خاص</button>
     </div>
 
-    <!-- CARDS -->
     <div class="cards-container" id="cardsContainer">
-
-        <!-- CARD 1 - حلقة 01 -->
-        <div class="card" data-type="episode" data-order="1" onclick="openModal(0)">
+        <div class="card" data-type="episode" onclick="openModal(0)">
             <div class="card-image" style="background: linear-gradient(135deg, #00ff41, #0a3d0a);">
                 <span class="card-badge">حلقة 01</span>
                 <span class="card-emoji">🎮</span>
@@ -547,14 +510,13 @@
             </div>
         </div>
 
-        <!-- CARD 2 - حلقة 02 -->
-        <div class="card" data-type="episode" data-order="2" onclick="openModal(1)">
+        <div class="card" data-type="episode" onclick="openModal(1)">
             <div class="card-image" style="background: linear-gradient(135deg, #39ff14, #006600);">
                 <span class="card-badge">حلقة 02</span>
                 <span class="card-emoji">🤖</span>
             </div>
             <div class="card-body">
-                <div class="card-title">الذكاء الاصطناعي - صديقي الجديد</div>
+                <div class="card-title">الذكاء الاصطناعي - صديقي</div>
                 <div class="card-desc">كيف استخدمت AI لبناء مشاريعي وكيف غيّر طريقة تفكيري</div>
                 <div class="card-meta">
                     <span class="card-date">2026/07/10</span>
@@ -564,8 +526,7 @@
             </div>
         </div>
 
-        <!-- CARD 3 - حلقة 03 -->
-        <div class="card" data-type="episode" data-order="3" onclick="openModal(2)">
+        <div class="card" data-type="episode" onclick="openModal(2)">
             <div class="card-image" style="background: linear-gradient(135deg, #00ff00, #003300);">
                 <span class="card-badge">حلقة 03</span>
                 <span class="card-emoji">🚀</span>
@@ -581,14 +542,13 @@
             </div>
         </div>
 
-        <!-- CARD 4 - ميكس 01 -->
-        <div class="card" data-type="mix" data-order="4" onclick="openModal(3)">
+        <div class="card" data-type="mix" onclick="openModal(3)">
             <div class="card-image" style="background: linear-gradient(135deg, #39ff14, #003d00);">
                 <span class="card-badge">ميكس 01</span>
                 <span class="card-emoji">🎵</span>
             </div>
             <div class="card-body">
-                <div class="card-title">ميكس البايسبك - حماسي</div>
+                <div class="card-title">ميكس البايسبك</div>
                 <div class="card-desc">اشهر ميكسات البايسبك 8-بت لرفع الحماس قبل البرمجة</div>
                 <div class="card-meta">
                     <span class="card-date">2026/07/12</span>
@@ -598,14 +558,13 @@
             </div>
         </div>
 
-        <!-- CARD 5 - ميكس 02 -->
-        <div class="card" data-type="mix" data-order="5" onclick="openModal(4)">
+        <div class="card" data-type="mix" onclick="openModal(4)">
             <div class="card-image" style="background: linear-gradient(135deg, #00ff41, #006600);">
                 <span class="card-badge">ميكس 02</span>
                 <span class="card-emoji">🎧</span>
             </div>
             <div class="card-body">
-                <div class="card-title">ميكس الليل - هادي ودافئ</div>
+                <div class="card-title">ميكس الليل</div>
                 <div class="card-desc">ميكس هادي للبرمجة بالليل مع اغاني ريلكس 8-بت</div>
                 <div class="card-meta">
                     <span class="card-date">2026/07/05</span>
@@ -615,14 +574,13 @@
             </div>
         </div>
 
-        <!-- CARD 6 - خاص -->
-        <div class="card" data-type="special" data-order="6" onclick="openModal(5)">
+        <div class="card" data-type="special" onclick="openModal(5)">
             <div class="card-image" style="background: linear-gradient(135deg, #39ff14, #001a00);">
                 <span class="card-badge">خاص ⭐</span>
                 <span class="card-emoji">👾</span>
             </div>
             <div class="card-body">
-                <div class="card-title">حفلة الكود - خاص</div>
+                <div class="card-title">حفلة الكود</div>
                 <div class="card-desc">حلقة خاصة مع مفاجآت وأسرار لم تُكشف من قبل</div>
                 <div class="card-meta">
                     <span class="card-date">2026/07/08</span>
@@ -631,7 +589,6 @@
                 <button class="download-btn" onclick="event.stopPropagation(); downloadItem('special-01')">⬇ تحميل</button>
             </div>
         </div>
-
     </div>
 
     <!-- MODAL -->
@@ -650,124 +607,174 @@
         </div>
     </div>
 
-    <!-- FOOTER -->
     <footer class="footer">
         <div class="footer-text">PIXEL MAGAZINE &copy; 2026</div>
         <div class="footer-hearts">💚 👾 💚</div>
     </footer>
 
-    <script>
-        const items = [
-            {
-                title: "حلقة 01: البداية - حلم البرمجة",
-                desc: "كيف بدأت رحلتي في عالم البرمجة وكيف غيرت حياتي بالكامل. في هذي الحلقة نحكي عن اللحظة اللي قررت فيها ادخل عالم الكود، الصعوبات اللي واجهتها، واللحظات الحلوة اللي خلّتني ما أكمل. في نهاية الحلقة راح تكتشف ان البرمجة مو بس كود، هي طريقة تفكير تغير حياتك.",
-                emoji: "🎮",
-                gradient: "linear-gradient(135deg, #00ff41, #0a3d0a)",
-                tags: ["بداية", "تحفيز", "8-bit"],
-                type: "episode",
-                download: "episode-01.zip"
-            },
-            {
-                title: "حلقة 02: الذكاء الاصطناعي - صديقي الجديد",
-                desc: "كيف استخدمت AI لبناء مشاريعي وكيف غيّر طريقة تفكيري. نحكي عن ChatGPT و Copilot وكيف نستخدمهم كمساعدين مو بس كأدوات. الحلقة تشرح كيف تاخذ فكرتك وتحولها لواقع باسرع وقت ممكن.",
-                emoji: "🤖",
-                gradient: "linear-gradient(135deg, #39ff14, #006600)",
-                tags: ["AI", "تقنية", "مشاريع"],
-                type: "episode",
-                download: "episode-02.zip"
-            },
-            {
-                title: "حلقة 03: من الصفر الى الاحتراف",
-                desc: "رحلة تعلم البرمجة من الصفر ومراحل التطور في عالم الكود. من أول سطر كود كتبته الى المشاريع الكبيرة اللي اشتغلت عليها. فيه نصائح لكل مبتدئ يبي يبدأ رحلته في البرمجة.",
-                emoji: "🚀",
-                gradient: "linear-gradient(135deg, #00ff00, #003300)",
-                tags: ["تعليم", "تطوير", "نصائح"],
-                type: "episode",
-                download: "episode-03.zip"
-            },
-            {
-                title: "ميكس 01: ميكس البايسبك - حماسي",
-                desc: "اشهر ميكسات البايسبك 8-بت لرفع الحماس قبل البرمجة. ميكس يحتوي على اقوى التراكات الكلاسيكية من العاب الفاميليوم والسيجا، مع ريمكسات جديدة تخلّيك تحس بحماس تبدأ المشروع الجديد.",
-                emoji: "🎵",
-                gradient: "linear-gradient(135deg, #39ff14, #003d00)",
-                tags: ["ميكس", "بايسبك", "حماسي"],
-                type: "mix",
-                download: "mix-01.zip"
-            },
-            {
-                title: "ميكس 02: ميكس الليل - هادي ودافئ",
-                desc: "ميكس هادي للبرمجة بالليل مع اغاني ريلكس 8-بت. مثالي لما تبي تركّز بالليل وتشتغل على مشروعك بدون ما تتأثر. الاغاني هادية ومريحة وتدخلك حالة تركيز عالي.",
-                emoji: "🎧",
-                gradient: "linear-gradient(135deg, #00ff41, #006600)",
-                tags: ["ميكس", "هادي", "ليلي"],
-                type: "mix",
-                download: "mix-02.zip"
-            },
-            {
-                title: "خاص: حفلة الكود",
-                desc: "حلقة خاصة مع مفاجآت وأسرار لم تُكشف من قبل. هذي الحلقة مختلفة عن غيرها، فيها مفاجآت ما حد يتوقعها ومشاريع سرية كنت أشتغل عليها بالسر. كن جاهز لشيء ما شفته من قبل!",
-                emoji: "👾",
-                gradient: "linear-gradient(135deg, #39ff14, #001a00)",
-                tags: ["خاص", "مفاجآت", "أسرار"],
-                type: "special",
-                download: "special-01.zip"
-            }
-        ];
+    <!-- THEME BAR -->
+    <div class="theme-bar">
+        <button class="theme-btn theme-btn-oil" onclick="setTheme('oil')">🎨 زيتية</button>
+        <button class="theme-btn theme-btn-water" onclick="setTheme('water')">💧 مائية</button>
+        <button class="theme-btn theme-btn-retro" onclick="setTheme('retro')">👾 ريترو</button>
+    </div>
 
+    <script>
+        // ===== AUDIO CONTEXT FOR SOUNDS =====
+        const AudioCtx = window.AudioContext || window.webkitAudioContext;
+        let audioCtx;
+        function getAudioCtx() { if (!audioCtx) audioCtx = new AudioCtx(); return audioCtx; }
+
+        function playSound(type) {
+            try {
+                const ctx = getAudioCtx();
+                const osc = ctx.createOscillator();
+                const gain = ctx.createGain();
+                osc.connect(gain);
+                gain.connect(ctx.destination);
+
+                if (type === 'tap') {
+                    osc.type = 'square';
+                    osc.frequency.setValueAtTime(800, ctx.currentTime);
+                    osc.frequency.exponentialRampToValueAtTime(400, ctx.currentTime + 0.08);
+                    gain.gain.setValueAtTime(0.08, ctx.currentTime);
+                    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.08);
+                    osc.start(ctx.currentTime);
+                    osc.stop(ctx.currentTime + 0.08);
+                } else if (type === 'open') {
+                    osc.type = 'square';
+                    osc.frequency.setValueAtTime(400, ctx.currentTime);
+                    osc.frequency.exponentialRampToValueAtTime(800, ctx.currentTime + 0.12);
+                    gain.gain.setValueAtTime(0.08, ctx.currentTime);
+                    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.12);
+                    osc.start(ctx.currentTime);
+                    osc.stop(ctx.currentTime + 0.12);
+                } else if (type === 'close') {
+                    osc.type = 'square';
+                    osc.frequency.setValueAtTime(600, ctx.currentTime);
+                    osc.frequency.exponentialRampToValueAtTime(200, ctx.currentTime + 0.1);
+                    gain.gain.setValueAtTime(0.06, ctx.currentTime);
+                    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.1);
+                    osc.start(ctx.currentTime);
+                    osc.stop(ctx.currentTime + 0.1);
+                } else if (type === 'download') {
+                    osc.type = 'square';
+                    osc.frequency.setValueAtTime(500, ctx.currentTime);
+                    osc.frequency.setValueAtTime(700, ctx.currentTime + 0.08);
+                    osc.frequency.setValueAtTime(900, ctx.currentTime + 0.16);
+                    gain.gain.setValueAtTime(0.08, ctx.currentTime);
+                    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.25);
+                    osc.start(ctx.currentTime);
+                    osc.stop(ctx.currentTime + 0.25);
+                } else if (type === 'switch') {
+                    osc.type = 'triangle';
+                    osc.frequency.setValueAtTime(1000, ctx.currentTime);
+                    osc.frequency.exponentialRampToValueAtTime(600, ctx.currentTime + 0.06);
+                    gain.gain.setValueAtTime(0.06, ctx.currentTime);
+                    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.06);
+                    osc.start(ctx.currentTime);
+                    osc.stop(ctx.currentTime + 0.06);
+                }
+            } catch(e) {}
+        }
+
+        // ===== RIPPLE EFFECT =====
+        function createRipple(e, el) {
+            const rect = el.getBoundingClientRect();
+            const ripple = document.createElement('span');
+            ripple.classList.add('ripple');
+            const size = Math.max(rect.width, rect.height);
+            ripple.style.width = ripple.style.height = size + 'px';
+            ripple.style.left = (e.clientX - rect.left - size / 2) + 'px';
+            ripple.style.top = (e.clientY - rect.top - size / 2) + 'px';
+            const style = getComputedStyle(document.body);
+            ripple.style.background = style.color + '33';
+            el.appendChild(ripple);
+            setTimeout(() => ripple.remove(), 500);
+        }
+
+        // ===== TOAST =====
+        function showToast(msg) {
+            document.querySelectorAll('.toast').forEach(t => t.remove());
+            const toast = document.createElement('div');
+            toast.className = 'toast';
+            toast.textContent = msg;
+            document.body.appendChild(toast);
+            setTimeout(() => toast.remove(), 2000);
+        }
+
+        // ===== THEME =====
+        function setTheme(theme) {
+            playSound('switch');
+            document.body.className = 'theme-' + theme;
+            localStorage.setItem('magazine-theme', theme);
+            showToast('تم تغيير الثيم ✨');
+        }
+        const saved = localStorage.getItem('magazine-theme');
+        if (saved) document.body.className = 'theme-' + saved;
+
+        // ===== FILTER =====
         function filterCards(type, btn) {
+            playSound('tap');
+            createRipple(event, btn);
             const cards = document.querySelectorAll('.card');
             document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
-
-            cards.forEach(card => {
+            cards.forEach((card, i) => {
                 if (type === 'all' || card.dataset.type === type) {
                     card.style.display = 'block';
-                    card.style.animation = 'fadeIn 0.3s ease';
+                    card.style.animation = 'fadeIn 0.3s ease ' + (i * 0.05) + 's both';
                 } else {
                     card.style.display = 'none';
                 }
             });
         }
 
+        // ===== MODAL =====
         function openModal(index) {
+            playSound('open');
             const item = items[index];
-            const overlay = document.getElementById('modalOverlay');
+            const card = event.currentTarget;
+            createRipple(event, card);
 
             document.getElementById('modalImage').style.background = item.gradient;
             document.getElementById('modalEmoji').textContent = item.emoji;
             document.getElementById('modalTitle').textContent = item.title;
             document.getElementById('modalDesc').textContent = item.desc;
-
-            const tagsContainer = document.getElementById('modalTags');
-            tagsContainer.innerHTML = item.tags.map(tag =>
-                `<span class="tag">${tag}</span>`
-            ).join('');
-
-            const downloadBtn = document.getElementById('modalDownload');
-            downloadBtn.onclick = () => downloadItem(item.download);
-
-            overlay.classList.add('active');
+            document.getElementById('modalTags').innerHTML = item.tags.map(t => `<span class="tag">${t}</span>`).join('');
+            document.getElementById('modalDownload').onclick = () => { playSound('download'); downloadItem(item.download); };
+            document.getElementById('modalOverlay').classList.add('active');
             document.body.style.overflow = 'hidden';
         }
 
         function closeModal(e) {
-            if (e.target === document.getElementById('modalOverlay')) {
-                closeModalDirect();
-            }
+            if (e.target === document.getElementById('modalOverlay')) closeModalDirect();
         }
 
         function closeModalDirect() {
+            playSound('close');
             document.getElementById('modalOverlay').classList.remove('active');
             document.body.style.overflow = 'auto';
         }
 
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') closeModalDirect();
-        });
+        document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModalDirect(); });
 
-        function downloadItem(filename) {
-            alert(`جاري تحميل ${filename}...\n\n(هنا تربط الملف الحقيقي بدل هذا التنبيه)`);
-        }
+        // ===== DATA =====
+        const items = [
+            { title: "حلقة 01: البداية - حلم البرمجة", desc: "كيف بدأت رحلتي في عالم البرمجة وكيف غيرت حياتي بالكامل. في هذي الحلقة نحكي عن اللحظة اللي قررت فيها ادخل عالم الكود، الصعوبات اللي واجهتها، واللحظات الحلوة.", emoji: "🎮", gradient: "linear-gradient(135deg, #00ff41, #0a3d0a)", tags: ["بداية", "تحفيز", "8-bit"], type: "episode", download: "episode-01.zip" },
+            { title: "حلقة 02: الذكاء الاصطناعي", desc: "كيف استخدمت AI لبناء مشاريعي وكيف غيّر طريقة تفكيري. نحكي عن ChatGPT و Copilot وكيف نستخدمهم كمساعدين مو بس كأدوات.", emoji: "🤖", gradient: "linear-gradient(135deg, #39ff14, #006600)", tags: ["AI", "تقنية", "مشاريع"], type: "episode", download: "episode-02.zip" },
+            { title: "حلقة 03: من الصفر الى الاحتراف", desc: "رحلة تعلم البرمجة من الصفر ومراحل التطور في عالم الكود. من أول سطر كود كتبته الى المشاريع الكبيرة اللي اشتغلت عليها.", emoji: "🚀", gradient: "linear-gradient(135deg, #00ff00, #003300)", tags: ["تعليم", "تطوير", "نصائح"], type: "episode", download: "episode-03.zip" },
+            { title: "ميكس 01: ميكس البايسبك", desc: "اشهر ميكسات البايسبك 8-بت لرفع الحماس قبل البرمجة. ميكس يحتوي على اقوى التراكات الكلاسيكية من العاب الفاميليوم والسيجا.", emoji: "🎵", gradient: "linear-gradient(135deg, #39ff14, #003d00)", tags: ["ميكس", "بايسبك", "حماسي"], type: "mix", download: "mix-01.zip" },
+            { title: "ميكس 02: ميكس الليل", desc: "ميكس هادي للبرمجة بالليل مع اغاني ريلكس 8-بت. مثالي لما تبي تركّز بالليل وتشتغل على مشروعك بدون ما تتأثر.", emoji: "🎧", gradient: "linear-gradient(135deg, #00ff41, #006600)", tags: ["ميكس", "هادي", "ليلي"], type: "mix", download: "mix-02.zip" },
+            { title: "خاص: حفلة الكود", desc: "حلقة خاصة مع مفاجآت وأسرار لم تُكشف من قبل. فيها مفاجآت ما حد يتوقعها ومشاريع سرية كنت أشتغل عليها بالسر.", emoji: "👾", gradient: "linear-gradient(135deg, #39ff14, #001a00)", tags: ["خاص", "مفاجآت", "أسرار"], type: "special", download: "special-01.zip" }
+        ];
+
+        function downloadItem(filename) { showToast('جاري تحميل ' + filename + ' ⬇'); }
+
+        // add ripple to all cards
+        document.querySelectorAll('.card').forEach(card => {
+            card.addEventListener('click', function(e) { createRipple(e, this); });
+        });
     </script>
 
 </body>
